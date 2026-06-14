@@ -1,0 +1,10 @@
+Opex_YoY_Variance_Percent := 
+VAR CurrentYTD = TOTALYTD(SUM(Fact_FinancialTransactions[ActualAmount]), Dim_Date[Date])
+VAR PriorYTD = TOTALYTD(SUM(Fact_FinancialTransactions[ActualAmount]), DATEADD(Dim_Date[Date], -1, YEAR))
+VAR VarianceValue = CurrentYTD - PriorYTD
+RETURN
+	DIVIDE(
+		VarianceValue, 
+		PriorYTD, 
+		0
+	)

@@ -1,0 +1,4 @@
+DPI := 
+VAR TotalDistributions = CALCULATE(SUM(Fact_UnlistedInvestments[CashFlowAmount]), Fact_UnlistedInvestments[TransactionType] = "Distribution")
+VAR TotalDrawdowns = -1 * CALCULATE(SUM(Fact_UnlistedInvestments[CashFlowAmount]), Fact_UnlistedInvestments[TransactionType] = "Drawdown")
+RETURN DIVIDE(TotalDistributions, TotalDrawdowns, 0)

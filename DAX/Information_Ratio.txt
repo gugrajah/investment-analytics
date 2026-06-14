@@ -1,0 +1,4 @@
+Information_Ratio := 
+VAR ActiveReturn = AVERAGEX(Fact_PortfolioReturns, Fact_PortfolioReturns[DailyReturn] - Fact_PortfolioReturns[DailyBenchmarkReturn]) * 252
+VAR TrackingError = [Portfolio_Tracking_Error_Percent]
+RETURN DIVIDE(ActiveReturn, TrackingError, 0)

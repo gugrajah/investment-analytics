@@ -1,0 +1,2 @@
+PFMA_Irregular_Expenditure_Counter := 
+CALCULATE(COUNTROWS(Fact_FinancialTransactions), Fact_FinancialTransactions[PFMA_Status_Code] > 0)

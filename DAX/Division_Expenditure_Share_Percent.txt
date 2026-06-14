@@ -1,0 +1,13 @@
+Division_Expenditure_Share_Percent := 
+VAR SelectedDivisionSpend = SUM(Fact_FinancialTransactions[ActualAmount])
+VAR TotalCorporateSpend = 
+	CALCULATE(
+		SUM(Fact_FinancialTransactions[ActualAmount]),
+		ALLSELECTED(Dim_Division)
+	)
+RETURN
+	DIVIDE(
+		SelectedDivisionSpend, 
+		TotalCorporateSpend, 
+		0
+	)

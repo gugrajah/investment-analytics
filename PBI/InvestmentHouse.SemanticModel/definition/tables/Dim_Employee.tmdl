@@ -1,0 +1,102 @@
+table Dim_Employee
+	lineageTag: 41d16271-8718-4ee0-ac7c-d9594a1c68e9
+	sourceLineageTag: 68857b46-8f67-45a5-9764-be355982cc46
+
+	column EmployeeKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 58182263-9078-4e9a-a62d-2ee63ef41008
+		sourceLineageTag: 29ae043c-8ff4-40c3-92fd-522064c4f697
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: EmployeeKey
+
+		annotation SummarizationSetBy = User
+
+	column EmployeeID
+		dataType: string
+		lineageTag: 5d23badd-951e-493a-a2ab-2a77e9bc4a15
+		sourceLineageTag: afea05b2-d42e-4902-ae1e-86b8cb9c13d0
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+		annotation SummarizationSetBy = User
+
+	column FullName
+		dataType: string
+		lineageTag: 8f7e71b1-73e1-4f61-90c3-ed9d319ca4f4
+		sourceLineageTag: 6e9a029b-08b2-41cc-baf9-ae43f4c53b96
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: FullName
+
+		annotation SummarizationSetBy = User
+
+	column Email
+		dataType: string
+		lineageTag: 602de12f-299f-4622-a03f-61a3d9d17bf1
+		sourceLineageTag: 94f81a29-5dd2-4309-a0aa-fe4b365e3267
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = User
+
+	column Gender
+		dataType: string
+		lineageTag: 6d1282a7-31fa-4135-b405-22a2aede22b8
+		sourceLineageTag: 6ba725f3-c112-4831-b7a7-7b98c55372a4
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = User
+
+	column EthnicGroup
+		dataType: string
+		lineageTag: 14a39a5b-0dd6-4f1d-a43a-2c5ebb7a038f
+		sourceLineageTag: 0f8d063d-b04a-4993-8975-178681a808a3
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: EthnicGroup
+
+		annotation SummarizationSetBy = User
+
+	column OccupationalLevel
+		dataType: string
+		lineageTag: 07529881-8db5-4884-89ca-2d62d522ec92
+		sourceLineageTag: 07fb922a-9a55-4fdd-8a95-f008f14c5efd
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: OccupationalLevel
+
+		annotation SummarizationSetBy = User
+
+	column IsHDI
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 970207ea-05d8-47a4-b076-f4dba61d9ab9
+		sourceLineageTag: e1fed652-687d-4bb7-b1eb-9884eacb2fa3
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: IsHDI
+
+		annotation SummarizationSetBy = User
+
+	column SalaryAmount
+		dataType: double
+		lineageTag: 50f6221d-e90c-4ed2-9231-a62bdb52d144
+		sourceLineageTag: 8ce7eba9-6760-4e56-8c51-32ee656be6d9
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: SalaryAmount
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_Employee = entity
+		mode: directQuery
+		source
+			entityName: Dim_Employee
+			expressionSource: 'DirectQuery to AS - investment_public'
+

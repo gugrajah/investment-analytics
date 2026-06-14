@@ -1,0 +1,92 @@
+table Fact_ProjectMilestones
+	lineageTag: c1250cfb-8367-4d49-ac97-edfa4e9a7385
+	sourceLineageTag: e61c997b-409a-42aa-85fb-f8aa71b8dc19
+
+
+	measure Project_Milestone_Adherence_Rate =
+			DIVIDE(
+				CALCULATE(COUNTROWS(Fact_ProjectMilestones), Fact_ProjectMilestones[Status] = "Completed"), 
+				COUNTROWS(Fact_ProjectMilestones), 
+				0
+			)
+		formatString: 0.00%
+	column MilestoneKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 65b626c4-2475-4d41-8a62-c997e45e0e12
+		sourceLineageTag: ecb13a4c-6993-4eab-bd45-fc7d30ad2506
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: MilestoneKey
+
+		annotation SummarizationSetBy = User
+
+	column PlannedDateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: fb2a3139-52ec-40c3-aace-d2d073b5c638
+		sourceLineageTag: ecc14446-d748-4333-829f-acdf9442414c
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: PlannedDateKey
+
+		annotation SummarizationSetBy = User
+
+	column ActualDateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 3c66564f-1299-42d2-9d62-ae3bd30de1dd
+		sourceLineageTag: 549b1b7b-1835-4d14-a124-03e877ee23b2
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: ActualDateKey
+
+		annotation SummarizationSetBy = User
+
+	column ProjectKey
+		dataType: int64
+		formatString: 0
+		lineageTag: a0fef5b9-6dd1-4a70-9ea6-d0363690f835
+		sourceLineageTag: 98fb9c03-a167-43b1-8619-0dde4b614f43
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: ProjectKey
+
+		annotation SummarizationSetBy = User
+
+	column MilestoneName
+		dataType: string
+		lineageTag: 27922ada-d26f-4117-abb1-f11a8cd10a85
+		sourceLineageTag: 27b4f475-6240-4757-87e8-2336c9458db2
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: MilestoneName
+
+		annotation SummarizationSetBy = User
+
+	column Weight
+		dataType: decimal
+		formatString: "R"#,0.###############;-"R"#,0.###############;"R"#,0.###############
+		lineageTag: 7e2102e9-8781-49f5-a343-2cec76836a16
+		sourceLineageTag: 76990e1b-665d-4f44-9236-4e13da6a6fa6
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: Weight
+
+		annotation SummarizationSetBy = User
+
+	column Status
+		dataType: string
+		lineageTag: 0f0ce487-1b84-4439-8f6b-608a7a28489c
+		sourceLineageTag: 9d56d3aa-12bd-4f7b-9fdc-ba2f458cfc9c
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = User
+
+	partition Fact_ProjectMilestones = entity
+		mode: directQuery
+		source
+			entityName: Fact_ProjectMilestones
+			expressionSource: 'DirectQuery to AS - investment_public'

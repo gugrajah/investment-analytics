@@ -1,0 +1,14 @@
+Rolling_12Month_Opex := 
+VAR EndDate = MAX(Dim_Date[Date])
+VAR StartDate = EDATE(EndDate, -12) + 1
+VAR CalculationPeriod = 
+	FILTER(
+		ALL(Dim_Date),
+		Dim_Date[Date] >= StartDate && 
+		Dim_Date[Date] <= EndDate
+	)
+RETURN
+	CALCULATE(
+		SUM(Fact_FinancialTransactions[ActualAmount]),
+		CalculationPeriod
+	)

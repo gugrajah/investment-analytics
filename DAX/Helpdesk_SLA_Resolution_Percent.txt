@@ -1,0 +1,2 @@
+Helpdesk_SLA_Resolution_Percent := 
+DIVIDE(CALCULATE(COUNTROWS(Fact_HelpdeskTickets), Fact_HelpdeskTickets[SLA_Met] = TRUE), COUNTROWS(Fact_HelpdeskTickets), 0)

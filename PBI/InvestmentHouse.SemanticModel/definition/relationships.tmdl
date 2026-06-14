@@ -1,0 +1,109 @@
+relationship Fact_FinancialTransactions_DateKey_Dim_Date_DateKey
+	fromColumn: Fact_FinancialTransactions.DateKey
+	toColumn: Dim_Date.DateKey
+
+relationship Fact_FinancialTransactions_DivisionKey_Dim_Division_DivisionKey
+	fromColumn: Fact_FinancialTransactions.DivisionKey
+	toColumn: Dim_Division.DivisionKey
+
+relationship Fact_HREvents_DateKey_Dim_Date_DateKey
+	fromColumn: Fact_HREvents.DateKey
+	toColumn: Dim_Date.DateKey
+
+relationship Fact_HREvents_EmployeeKey_Dim_Employee_EmployeeKey
+	fromColumn: Fact_HREvents.EmployeeKey
+	toColumn: Dim_Employee.EmployeeKey
+
+relationship Fact_HREvents_DivisionKey_Dim_Division_DivisionKey
+	fromColumn: Fact_HREvents.DivisionKey
+	toColumn: Dim_Division.DivisionKey
+
+relationship Fact_TradeSettlements_ExecutionDateKey_Dim_Date_DateKey
+	fromColumn: Fact_TradeSettlements.ExecutionDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship Fact_TradeSettlements_SettlementDateKey_Dim_Date_DateKey
+	isActive: false
+	fromColumn: Fact_TradeSettlements.SettlementDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship Fact_TradeSettlements_AssetKey_Dim_InvestmentAsset_AssetKey
+	fromColumn: Fact_TradeSettlements.AssetKey
+	toColumn: Dim_InvestmentAsset.AssetKey
+
+relationship Fact_TradeSettlements_FundKey_Dim_Fund_FundKey
+	fromColumn: Fact_TradeSettlements.FundKey
+	toColumn: Dim_Fund.FundKey
+
+relationship Fact_TradeSettlements_BEELevelKey_Dim_BEELevel_BEELevelKey
+	fromColumn: Fact_TradeSettlements.BEELevelKey
+	toColumn: Dim_BEELevel.BEELevelKey
+
+relationship Fact_AuditFindings_RaisedDateKey_Dim_Date_DateKey
+	fromColumn: Fact_AuditFindings.RaisedDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship Fact_AuditFindings_TargetDateKey_Dim_Date_DateKey
+	isActive: false
+	fromColumn: Fact_AuditFindings.TargetDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship Fact_AuditFindings_ActualResolutionDateKey_Dim_Date_DateKey
+	isActive: false
+	fromColumn: Fact_AuditFindings.ActualResolutionDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship Fact_AuditFindings_AuditCategoryKey_Dim_AuditCategory_AuditCategoryKey
+	fromColumn: Fact_AuditFindings.AuditCategoryKey
+	toColumn: Dim_AuditCategory.AuditCategoryKey
+
+relationship Fact_AuditFindings_DivisionKey_Dim_Division_DivisionKey
+	crossFilteringBehavior: bothDirections
+	fromColumn: Fact_AuditFindings.DivisionKey
+	toColumn: Dim_Division.DivisionKey
+
+relationship Fact_ProjectMilestones_PlannedDateKey_Dim_Date_DateKey
+	fromColumn: Fact_ProjectMilestones.PlannedDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship Fact_ProjectMilestones_ActualDateKey_Dim_Date_DateKey
+	isActive: false
+	fromColumn: Fact_ProjectMilestones.ActualDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship Fact_PortfolioReturns_DateKey_Dim_Date_DateKey
+	fromColumn: Fact_PortfolioReturns.DateKey
+	toColumn: Dim_Date.DateKey
+
+relationship Fact_PortfolioReturns_AssetKey_Dim_InvestmentAsset_AssetKey
+	fromColumn: Fact_PortfolioReturns.AssetKey
+	toColumn: Dim_InvestmentAsset.AssetKey
+
+relationship Fact_PortfolioReturns_FundKey_Dim_Fund_FundKey
+	fromColumn: Fact_PortfolioReturns.FundKey
+	toColumn: Dim_Fund.FundKey
+
+relationship Fact_UnlistedInvestments_DateKey_Dim_Date_DateKey
+	fromColumn: Fact_UnlistedInvestments.DateKey
+	toColumn: Dim_Date.DateKey
+
+relationship Fact_UnlistedInvestments_AssetKey_Dim_InvestmentAsset_AssetKey
+	fromColumn: Fact_UnlistedInvestments.AssetKey
+	toColumn: Dim_InvestmentAsset.AssetKey
+
+relationship Fact_UnlistedInvestments_FundKey_Dim_Fund_FundKey
+	fromColumn: Fact_UnlistedInvestments.FundKey
+	toColumn: Dim_Fund.FundKey
+
+relationship Fact_HelpdeskTickets_CreatedDateKey_Dim_Date_DateKey
+	fromColumn: Fact_HelpdeskTickets.CreatedDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship Fact_HelpdeskTickets_ClosedDateKey_Dim_Date_DateKey
+	isActive: false
+	fromColumn: Fact_HelpdeskTickets.ClosedDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship Fact_HelpdeskTickets_EmployeeKey_Dim_Employee_EmployeeKey
+	fromColumn: Fact_HelpdeskTickets.EmployeeKey
+	toColumn: Dim_Employee.EmployeeKey

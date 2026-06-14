@@ -1,0 +1,8 @@
+Active_Staff_Headcount := 
+VAR MaxDateInContext = MAX(Dim_Date[Date])
+RETURN
+	CALCULATE(
+		DISTINCTCOUNT(Fact_HREvents[EmployeeKey]),
+		Fact_HREvents[EventTypeName] = "Active Snapshot",
+		Dim_Date[Date] = MaxDateInContext
+	)

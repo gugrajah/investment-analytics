@@ -1,0 +1,5 @@
+MOIC := 
+VAR TotalDistributions = CALCULATE(SUM(Fact_UnlistedInvestments[CashFlowAmount]), Fact_UnlistedInvestments[TransactionType] = "Distribution")
+VAR TotalDrawdowns = -1 * CALCULATE(SUM(Fact_UnlistedInvestments[CashFlowAmount]), Fact_UnlistedInvestments[TransactionType] = "Drawdown")
+VAR CurrentNAV = CALCULATE(SUM(Fact_UnlistedInvestments[NetAssetValue]), Fact_UnlistedInvestments[TransactionType] = "Valuation")
+RETURN DIVIDE(TotalDistributions + CurrentNAV, TotalDrawdowns, 0)

@@ -1,0 +1,130 @@
+table Fact_AuditFindings
+	lineageTag: 7b5c012c-4fae-40b1-a4a5-43239d00ec20
+	sourceLineageTag: 01060b89-5b0a-4c32-b44a-b0e4ed54d0c4
+
+
+
+
+	measure Open_Audit_Findings_Count = CALCULATE(COUNTROWS(Fact_AuditFindings), Fact_AuditFindings[IsClosed] = FALSE)
+		formatString: #,##0
+
+	measure Average_Days_to_Resolve =
+			AVERAGEX(
+				FILTER(Fact_AuditFindings, NOT(ISBLANK(Fact_AuditFindings[ActualResolutionDateKey]))),
+				DATEDIFF(
+					RELATED(Dim_Date[Date]), 
+					LOOKUPVALUE(Dim_Date[Date], Dim_Date[DateKey], Fact_AuditFindings[ActualResolutionDateKey]), 
+					DAY
+				)
+			)
+		formatString: 0.0
+
+	measure Regulatory_SLA_Compliance_Percent =
+			VAR CompliantFindings = 
+				CALCULATE(
+					COUNTROWS(Fact_AuditFindings),
+					FILTER(
+						Fact_AuditFindings,
+						IF(
+							Fact_AuditFindings[IsClosed] = TRUE,
+							Fact_AuditFindings[ActualResolutionDateKey] <= Fact_AuditFindings[TargetDateKey],
+							Fact_AuditFindings[TargetDateKey] >= 20251231
+						)
+					)
+				)
+			RETURN
+				DIVIDE(CompliantFindings, COUNTROWS(Fact_AuditFindings), 0)
+		formatString: 0.00%
+	column FindingKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 59f85e4b-fde4-4c7b-9a48-49f4d5bdfe9c
+		sourceLineageTag: ab01d716-ab80-4b2d-81f6-a79fc4d22b77
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: FindingKey
+
+		annotation SummarizationSetBy = User
+
+	column RaisedDateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 46e72246-26e5-4ede-950f-268380d33cfe
+		sourceLineageTag: 20cb88f7-e1bd-4009-bd3a-8a4c834de3d3
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: RaisedDateKey
+
+		annotation SummarizationSetBy = User
+
+	column TargetDateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: add04584-c123-475c-a88d-f90700a75a3a
+		sourceLineageTag: 6ca9ef05-b4f7-4c12-9f59-8f48627c399d
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: TargetDateKey
+
+		annotation SummarizationSetBy = User
+
+	column ActualResolutionDateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 4fde54fc-cc06-4abf-8ada-fce1d70cf272
+		sourceLineageTag: f1b35a09-3639-4a88-9cfc-ffb0f0fdd29b
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: ActualResolutionDateKey
+
+		annotation SummarizationSetBy = User
+
+	column AuditCategoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: b81ab4c4-2c94-43fc-80b3-26858a07b7f8
+		sourceLineageTag: bdefaf78-dbff-43ec-815a-534dc503c22a
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: AuditCategoryKey
+
+		annotation SummarizationSetBy = User
+
+	column DivisionKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 87bdfedd-2ef0-44c4-87be-9d7ea5133728
+		sourceLineageTag: c136bf6e-6038-4ec2-9b92-d2c96efe9ad5
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: DivisionKey
+
+		annotation SummarizationSetBy = User
+
+	column SeverityWeight
+		dataType: int64
+		formatString: 0
+		lineageTag: a08b35cc-95fd-4d19-b6c8-65e96fd27b3c
+		sourceLineageTag: 2c7b7e05-feb2-4ad0-aca7-1178bb9c597f
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: SeverityWeight
+
+		annotation SummarizationSetBy = User
+
+	column IsClosed
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a41b1530-3e4d-458a-8f3d-b24c9e1d5966
+		sourceLineageTag: f0ce3ecc-53ee-4bfe-9c8f-025ad2d5fa28
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: IsClosed
+
+		annotation SummarizationSetBy = User
+
+	partition Fact_AuditFindings = entity
+		mode: directQuery
+		source
+			entityName: Fact_AuditFindings
+			expressionSource: 'DirectQuery to AS - investment_public'

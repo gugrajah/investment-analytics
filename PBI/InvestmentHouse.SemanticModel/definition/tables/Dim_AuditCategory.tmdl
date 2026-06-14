@@ -1,0 +1,51 @@
+table Dim_AuditCategory
+	lineageTag: a8f08c79-d96b-46f8-a1a0-35df58b035b4
+	sourceLineageTag: 1c9aef6c-148a-4084-b253-43b229fdd489
+
+	column AuditCategoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 60069b9c-9b92-4406-aa4e-8215f3691128
+		sourceLineageTag: 597621cb-8e7d-4ce2-9ab7-e09e03c82e81
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: AuditCategoryKey
+
+		annotation SummarizationSetBy = User
+
+	column SourceType
+		dataType: string
+		lineageTag: de0c9955-0c88-4b95-a05c-fe6c511c9f76
+		sourceLineageTag: b0887985-6b4c-4b45-9b17-d5ef58855c28
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: SourceType
+
+		annotation SummarizationSetBy = User
+
+	column Classification
+		dataType: string
+		lineageTag: 02645e81-2824-4c50-a12c-a492f720efa4
+		sourceLineageTag: d06fb3a5-44f8-480c-a42a-a6faf9ea5742
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: Classification
+
+		annotation SummarizationSetBy = User
+
+	column RiskLevel
+		dataType: string
+		lineageTag: a52790e1-beac-487b-b853-7f3e47b07595
+		sourceLineageTag: 50df47f4-61e5-41cd-a20c-5aa09830cd3b
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: RiskLevel
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_AuditCategory = entity
+		mode: directQuery
+		source
+			entityName: Dim_AuditCategory
+			expressionSource: 'DirectQuery to AS - investment_public'
+

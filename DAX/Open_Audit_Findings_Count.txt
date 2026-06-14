@@ -1,0 +1,2 @@
+Open_Audit_Findings_Count := 
+CALCULATE(COUNTROWS(Fact_AuditFindings), Fact_AuditFindings[IsClosed] = FALSE)

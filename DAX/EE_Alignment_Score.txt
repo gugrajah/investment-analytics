@@ -1,0 +1,5 @@
+EE_Alignment_Score := 
+VAR HDIHeadcount = CALCULATE([Active_Staff_Headcount], Dim_Employee[IsHDI] = TRUE)
+VAR TotalHeadcount = [Active_Staff_Headcount]
+RETURN
+	DIVIDE(HDIHeadcount, TotalHeadcount, 0)

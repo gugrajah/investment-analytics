@@ -1,0 +1,131 @@
+table Fact_TradeSettlements
+	lineageTag: fa7fa67f-a0b4-4c9f-94b6-1cefdc6b54bd
+	sourceLineageTag: 0d6ed5f7-f7c3-4109-a56a-9ad1542c9efe
+
+
+
+
+
+
+	measure Total_Trade_Value = SUM(Fact_TradeSettlements[TradeValue])
+		formatString: R#,##0.00;"(R#,##0.00)";"-"
+
+	measure Trade_Settlement_Failure_Rate = DIVIDE(CALCULATE(COUNTROWS(Fact_TradeSettlements), Fact_TradeSettlements[SettlementStatus] = "Failed"), COUNTROWS(Fact_TradeSettlements))
+		formatString: 0.00%
+
+	measure BEE_Brokerage_Allocation_Percent =
+			DIVIDE(
+				CALCULATE(SUM(Fact_TradeSettlements[BrokerageFee]), Dim_BEELevel[BEELevel] = 1), 
+				SUM(Fact_TradeSettlements[BrokerageFee]), 
+				0
+			)
+		formatString: 0.00%
+
+	measure BBEE_Scorecard_Points =
+			DIVIDE(
+				SUMX(Fact_TradeSettlements, RELATED(Dim_BEELevel[RecognitionPercentage]) * Fact_TradeSettlements[TradeValue]), 
+				SUM(Fact_TradeSettlements[TradeValue]), 
+				0
+			)
+		formatString: 0.00
+	column TradeKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 58bba1c4-7e30-4b12-84ab-746a3d0e67fc
+		sourceLineageTag: ae568dc8-bea2-4c66-92c1-18da98a07636
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: TradeKey
+
+		annotation SummarizationSetBy = User
+
+	column ExecutionDateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: ea6b5b7f-0cf3-44d0-9499-84bb6200df89
+		sourceLineageTag: cde40d9e-0487-472b-a45b-192365fa711d
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: ExecutionDateKey
+
+		annotation SummarizationSetBy = User
+
+	column SettlementDateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: f171e587-e10e-4242-adc2-ea3ff23d6459
+		sourceLineageTag: e64e2220-b5e6-4a8b-aa52-f8bb3abb6e68
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: SettlementDateKey
+
+		annotation SummarizationSetBy = User
+
+	column AssetKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 1e9e13ba-4574-4334-a896-75f7a6685748
+		sourceLineageTag: 5d67083e-49db-4735-9823-2eaa386511a3
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: AssetKey
+
+		annotation SummarizationSetBy = User
+
+	column FundKey
+		dataType: int64
+		formatString: 0
+		lineageTag: b26d7426-433f-4de8-9584-b6c401639fbb
+		sourceLineageTag: a0f12c49-0145-43f7-8c8d-82c104c36f52
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: FundKey
+
+		annotation SummarizationSetBy = User
+
+	column BEELevelKey
+		dataType: int64
+		formatString: 0
+		lineageTag: a1a5f90b-00d3-40b7-bd46-2e76ea3b9da0
+		sourceLineageTag: fbe8d3e6-43e6-479f-93dc-5913265544c2
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: BEELevelKey
+
+		annotation SummarizationSetBy = User
+
+	column TradeValue
+		dataType: double
+		lineageTag: edf32ac6-e0e4-4d76-9cef-50b090c3ab3f
+		sourceLineageTag: 4df08293-7a15-4493-b745-63111c05d9e3
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: TradeValue
+
+		annotation SummarizationSetBy = User
+
+	column BrokerageFee
+		dataType: double
+		lineageTag: c80a97f0-3c4c-495d-b27a-a0046b6d4d3e
+		sourceLineageTag: e5f454b0-8a65-4174-a928-6cf2cd939b4e
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: BrokerageFee
+
+		annotation SummarizationSetBy = User
+
+	column SettlementStatus
+		dataType: string
+		lineageTag: f82b374b-7c3b-40be-8236-be9de1975a3a
+		sourceLineageTag: 53f2dbf2-0145-4e3d-9627-2ccad717f9d8
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: SettlementStatus
+
+		annotation SummarizationSetBy = User
+
+	partition Fact_TradeSettlements = entity
+		mode: directQuery
+		source
+			entityName: Fact_TradeSettlements
+			expressionSource: 'DirectQuery to AS - investment_public'

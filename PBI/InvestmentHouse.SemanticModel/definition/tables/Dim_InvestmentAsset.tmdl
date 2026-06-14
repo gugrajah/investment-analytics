@@ -1,0 +1,83 @@
+table Dim_InvestmentAsset
+	lineageTag: 907f472a-48f6-41d6-813c-415bd662fe4c
+	sourceLineageTag: 816c1b3f-0626-4bda-9e50-dc93a9578bcb
+
+	column AssetKey
+		dataType: int64
+		formatString: 0
+		lineageTag: b0d08a1f-9af6-44b5-9125-b8b7e44d2171
+		sourceLineageTag: c893295c-20bd-4cff-8779-3211bcd02cbd
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: AssetKey
+
+		annotation SummarizationSetBy = User
+
+	column ISIN
+		dataType: string
+		lineageTag: 5b9ed2e7-0a65-440c-8ccc-aa01f87adc45
+		sourceLineageTag: 5e79d7f3-2a49-483e-91b6-3ddfdedcf334
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: ISIN
+
+		annotation SummarizationSetBy = User
+
+	column AssetName
+		dataType: string
+		lineageTag: 806f8099-81f8-4a1b-b2a8-971d288b826d
+		sourceLineageTag: 6cd70003-b532-48df-8357-5e143de303fd
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: AssetName
+
+		annotation SummarizationSetBy = User
+
+	column AssetClass
+		dataType: string
+		lineageTag: 5bd803b1-b038-460f-a8d4-fa8e13bceed1
+		sourceLineageTag: 99cf63b9-b80b-43d4-bf77-96da64e23c89
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: AssetClass
+
+		annotation SummarizationSetBy = User
+
+	column Sector
+		dataType: string
+		lineageTag: deb2aef1-6d8c-45cd-a695-555f76749201
+		sourceLineageTag: 68fe8183-1dd3-4dcd-a635-f2b6e61c0aec
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: Sector
+
+		annotation SummarizationSetBy = User
+
+	column ESG_Score
+		dataType: decimal
+		formatString: "R"#,0.###############;-"R"#,0.###############;"R"#,0.###############
+		lineageTag: e8a14423-6886-4f21-80ba-222d73d0d209
+		sourceLineageTag: 279a3bbd-8ce4-446f-b806-0bd81357c273
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: ESG_Score
+
+		annotation SummarizationSetBy = User
+
+	column CarbonIntensity
+		dataType: decimal
+		formatString: "R"#,0.###############;-"R"#,0.###############;"R"#,0.###############
+		lineageTag: 8c39372e-c4f6-46e8-8b81-90d2ece16028
+		sourceLineageTag: 428099c3-908d-48c3-a97f-eb38b0dd9458
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: CarbonIntensity
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_InvestmentAsset = entity
+		mode: directQuery
+		source
+			entityName: Dim_InvestmentAsset
+			expressionSource: 'DirectQuery to AS - investment_public'
+

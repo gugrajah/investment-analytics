@@ -1,0 +1,4 @@
+VaR_95_1Day := 
+VAR MeanReturn = AVERAGEX(Fact_PortfolioReturns, Fact_PortfolioReturns[DailyReturn])
+VAR StdDevReturn = STDEVX.S(Fact_PortfolioReturns, Fact_PortfolioReturns[DailyReturn])
+RETURN -1 * (MeanReturn - 1.645 * StdDevReturn)

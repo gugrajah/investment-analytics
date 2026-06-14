@@ -1,0 +1,4 @@
+System_Availability_Percent := 
+VAR TotalDowntimeMinutes = CALCULATE(SUM(Fact_HelpdeskTickets[ResolutionDurationMinutes]), Fact_HelpdeskTickets[PriorityCode] = 1)
+VAR TotalMinutesInPeriod = COUNTROWS(Dim_Date) * 1440
+RETURN 1 - DIVIDE(TotalDowntimeMinutes, TotalMinutesInPeriod, 0)

@@ -1,0 +1,43 @@
+table Dim_BEELevel
+	lineageTag: 81de5f47-cebe-4144-ad20-8e017a898d91
+	sourceLineageTag: 2509a9b2-febd-4d94-bad4-4a0d40edd218
+
+	column BEELevelKey
+		dataType: int64
+		formatString: 0
+		lineageTag: c8060b46-50af-40ef-8d08-0c2d15efef44
+		sourceLineageTag: 0bdb949c-746c-4571-8d4a-b2ccc561534d
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: BEELevelKey
+
+		annotation SummarizationSetBy = User
+
+	column BEELevel
+		dataType: int64
+		formatString: 0
+		lineageTag: ad6ab1af-b63a-4327-97f0-8dd7423c63ef
+		sourceLineageTag: 19244d02-633b-4fde-b00e-94f9c8b974e5
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: BEELevel
+
+		annotation SummarizationSetBy = User
+
+	column RecognitionPercentage
+		dataType: decimal
+		formatString: "R"#,0.###############;-"R"#,0.###############;"R"#,0.###############
+		lineageTag: ff33db81-a7a3-44fd-8575-5475cd28c74d
+		sourceLineageTag: a987ca2f-2add-469f-807d-fc83acf35dde
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: RecognitionPercentage
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_BEELevel = entity
+		mode: directQuery
+		source
+			entityName: Dim_BEELevel
+			expressionSource: 'DirectQuery to AS - investment_public'
+

@@ -1,0 +1,11 @@
+expression 'DirectQuery to AS - investment_public' =
+		let
+		    Source = AnalysisServices.Database("powerbi://api.powerbi.com/v1.0/myorg/PIC_Analytics_DEV", "investment_public"),
+		    Cubes = Table.Combine(Source[Data]),
+		    Cube = Cubes{[Id="Model", Kind="Cube"]}[Data]
+		in
+		    Cube
+	lineageTag: 9f5ca9ed-3beb-43dc-81b7-f4fba7c12ab5
+
+	annotation PBI_IncludeFutureArtifacts = True
+

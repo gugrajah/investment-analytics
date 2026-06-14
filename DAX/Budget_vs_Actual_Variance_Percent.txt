@@ -1,0 +1,2 @@
+Budget_vs_Actual_Variance_Percent := 
+DIVIDE(SUM(Fact_FinancialTransactions[ActualAmount]) - SUM(Fact_FinancialTransactions[BudgetAmount]), SUM(Fact_FinancialTransactions[BudgetAmount]), 0)

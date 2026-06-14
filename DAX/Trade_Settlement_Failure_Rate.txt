@@ -1,0 +1,2 @@
+Trade_Settlement_Failure_Rate := 
+DIVIDE(CALCULATE(COUNTROWS(Fact_TradeSettlements), Fact_TradeSettlements[SettlementStatus] = "Failed"), COUNTROWS(Fact_TradeSettlements))

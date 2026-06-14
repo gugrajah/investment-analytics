@@ -1,0 +1,3 @@
+Regulatory_SLA_Compliance_Percent := 
+VAR CompliantFindings = CALCULATE(COUNTROWS(Fact_AuditFindings), FILTER(Fact_AuditFindings, IF(Fact_AuditFindings[IsClosed] = TRUE, Fact_AuditFindings[ActualResolutionDateKey] <= Fact_AuditFindings[TargetDateKey], Fact_AuditFindings[TargetDateKey] >= 20251231)))
+RETURN DIVIDE(CompliantFindings, COUNTROWS(Fact_AuditFindings), 0)

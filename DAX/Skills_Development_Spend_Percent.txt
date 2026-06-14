@@ -1,0 +1,2 @@
+Skills_Development_Spend_Percent := 
+DIVIDE(SUM(Fact_HREvents[TrainingSpend]), SUM(Dim_Employee[SalaryAmount]), 0)

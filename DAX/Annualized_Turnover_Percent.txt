@@ -1,0 +1,5 @@
+Annualized_Turnover_Percent := 
+VAR ExitCount = CALCULATE(COUNTROWS(Fact_HREvents), Fact_HREvents[EventTypeName] = "Exit")
+VAR AvgHeadcount = AVERAGEX(VALUES(Dim_Date[DateKey]), [Active_Staff_Headcount])
+RETURN
+	DIVIDE(ExitCount, AvgHeadcount, 0)

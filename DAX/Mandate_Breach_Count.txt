@@ -1,0 +1,2 @@
+Mandate_Breach_Count := 
+CALCULATE(COUNTROWS(Fact_PortfolioReturns), ABS(Fact_PortfolioReturns[DailyReturn] - Fact_PortfolioReturns[DailyBenchmarkReturn]) > 0.02)

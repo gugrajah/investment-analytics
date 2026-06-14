@@ -1,0 +1,3 @@
+Private_Equity_IRR_Approximation := 
+VAR CashFlowTable = SELECTCOLUMNS(Fact_UnlistedInvestments, "CF_Date", RELATED(Dim_Date[Date]), "CF_Amount", Fact_UnlistedInvestments[CashFlowAmount])
+RETURN XIRR(CashFlowTable, [CF_Amount], [CF_Date])

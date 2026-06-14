@@ -1,0 +1,8 @@
+Cost_to_Income_Ratio := 
+VAR TotalIncome = SUMX(Fact_PortfolioReturns, Fact_PortfolioReturns[MarketValue] * 0.0015)
+RETURN
+	DIVIDE(
+		SUM(Fact_FinancialTransactions[ActualAmount]),
+		TotalIncome,
+		0
+	)

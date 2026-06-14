@@ -1,0 +1,6 @@
+Portfolio_Tracking_Error_Percent := 
+VAR MeanExcessReturn = AVERAGEX(Fact_PortfolioReturns, Fact_PortfolioReturns[DailyReturn] - Fact_PortfolioReturns[DailyBenchmarkReturn])
+VAR ExcessReturnVarianceIter = SUMX(Fact_PortfolioReturns, POWER((Fact_PortfolioReturns[DailyReturn] - Fact_PortfolioReturns[DailyBenchmarkReturn]) - MeanExcessReturn, 2))
+VAR TotalObservedDays = COUNTROWS(Fact_PortfolioReturns)
+VAR DailyTrackingError = SQRT(DIVIDE(ExcessReturnVarianceIter, TotalObservedDays - 1, 0))
+RETURN DailyTrackingError * SQRT(252)

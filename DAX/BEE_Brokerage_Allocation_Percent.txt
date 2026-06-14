@@ -1,0 +1,2 @@
+BEE_Brokerage_Allocation_Percent := 
+DIVIDE(CALCULATE(SUM(Fact_TradeSettlements[BrokerageFee]), Dim_BEELevel[BEELevel] = 1), SUM(Fact_TradeSettlements[BrokerageFee]), 0)

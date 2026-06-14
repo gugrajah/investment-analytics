@@ -1,0 +1,5 @@
+Data_Quality_Index := 
+VAR FinancialCompliance = DIVIDE(CALCULATE(COUNTROWS(Fact_FinancialTransactions), Fact_FinancialTransactions[PFMA_Status_Code] = 0), COUNTROWS(Fact_FinancialTransactions), 0)
+VAR TradeSettlementRate = 1 - [Trade_Settlement_Failure_Rate]
+VAR SLACompliance = [Helpdesk_SLA_Resolution_Percent]
+RETURN (FinancialCompliance + TradeSettlementRate + SLACompliance) / 3

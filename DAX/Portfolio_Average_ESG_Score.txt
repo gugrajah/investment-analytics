@@ -1,0 +1,2 @@
+Portfolio_Average_ESG_Score := 
+DIVIDE(SUMX(Fact_PortfolioReturns, RELATED(Dim_InvestmentAsset[ESG_Score]) * Fact_PortfolioReturns[MarketValue]), [Total_Market_Value], 0)

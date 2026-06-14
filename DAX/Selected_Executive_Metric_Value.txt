@@ -1,0 +1,10 @@
+Selected_Executive_Metric_Value := 
+VAR CurrentSelection = SELECTEDVALUE(Dim_DynamicMetricControls[MetricName], "Total AUM")
+RETURN
+	SWITCH(
+		CurrentSelection,
+		"Total AUM", [Total_AUM_ZAR],
+		"YTD Return", [Weighted_Portfolio_Return_Percent],
+		"PFMA Variances", [PFMA_Irregular_Expenditure_Counter],
+		[Total_AUM_ZAR]
+	)

@@ -1,0 +1,2 @@
+Project_Milestone_Adherence_Rate := 
+DIVIDE(CALCULATE(COUNTROWS(Fact_ProjectMilestones), Fact_ProjectMilestones[Status] = "Completed"), COUNTROWS(Fact_ProjectMilestones), 0)

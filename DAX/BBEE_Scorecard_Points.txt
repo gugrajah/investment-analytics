@@ -1,0 +1,2 @@
+BBEE_Scorecard_Points := 
+DIVIDE(SUMX(Fact_TradeSettlements, RELATED(Dim_BEELevel[RecognitionPercentage]) * Fact_TradeSettlements[TradeValue]), SUM(Fact_TradeSettlements[TradeValue]), 0)

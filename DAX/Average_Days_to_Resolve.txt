@@ -1,0 +1,2 @@
+Average_Days_to_Resolve := 
+AVERAGEX(FILTER(Fact_AuditFindings, NOT(ISBLANK(Fact_AuditFindings[ActualResolutionDateKey]))), DATEDIFF(RELATED(Dim_Date[Date]), LOOKUPVALUE(Dim_Date[Date], Dim_Date[DateKey], Fact_AuditFindings[ActualResolutionDateKey]), DAY))

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "InvestmentHouse"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "97997a04-ca5a-45a3-a21a-5bc2dd650c86"
+  }
+}
