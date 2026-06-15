@@ -1,0 +1,90 @@
+﻿table Fact_PortfolioReturns
+	lineageTag: a6de052d-77ce-4842-9fde-3babb55dc34e
+	sourceLineageTag: [dbo].[Fact_PortfolioReturns]
+
+	column ReturnKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 611223fa-0d5a-4cc4-9a32-ce0dd1734140
+		sourceLineageTag: ReturnKey
+		summarizeBy: count
+		sourceColumn: ReturnKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 7dbace0a-baeb-40d1-9862-57b81118330e
+		sourceLineageTag: DateKey
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: a90b359d-97d3-4e54-b231-071dd68ac50c
+		sourceLineageTag: AssetKey
+		summarizeBy: none
+		sourceColumn: AssetKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column FundKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: a078bc3e-6fa3-4f39-8e9b-19dacd9e64a4
+		sourceLineageTag: FundKey
+		summarizeBy: none
+		sourceColumn: FundKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column DailyReturn
+		dataType: double
+		lineageTag: 4c251e95-fd81-41ae-9121-1d41b8944dcc
+		sourceLineageTag: DailyReturn
+		summarizeBy: sum
+		sourceColumn: DailyReturn
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DailyBenchmarkReturn
+		dataType: double
+		lineageTag: b54ae0e6-f175-419f-82c9-735dc5c6903e
+		sourceLineageTag: DailyBenchmarkReturn
+		summarizeBy: sum
+		sourceColumn: DailyBenchmarkReturn
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MarketValue
+		dataType: double
+		formatString: "R"#,0.00;-"R"#,0.00;"R"#,0.00
+		lineageTag: 9d8bcf37-c1c1-45c2-bd54-6338fc435abf
+		sourceLineageTag: MarketValue
+		summarizeBy: sum
+		sourceColumn: MarketValue
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-ZA"}
+
+	partition Fact_PortfolioReturns = entity
+		mode: directLake
+		source
+			entityName: Fact_PortfolioReturns
+			schemaName: dbo
+			expressionSource: 'DirectLake - InvestmentHouse_db'
+

@@ -1,0 +1,74 @@
+﻿table Fact_HREvents
+	lineageTag: e4ebab45-8c3c-4d60-ad22-27863b9cd3ad
+	sourceLineageTag: [dbo].[Fact_HREvents]
+
+	column HREventKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 78e874eb-f744-4b6f-b7e2-f8df86040e80
+		sourceLineageTag: HREventKey
+		summarizeBy: count
+		sourceColumn: HREventKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 8b22a082-5b28-46a1-8794-d55edc58ed72
+		sourceLineageTag: DateKey
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 32a00d46-1e08-4b37-ab01-ee4f0ed82080
+		sourceLineageTag: EmployeeKey
+		summarizeBy: none
+		sourceColumn: EmployeeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivisionKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: b7a25b76-8450-45b5-81b2-2bbf4c1433d6
+		sourceLineageTag: DivisionKey
+		summarizeBy: none
+		sourceColumn: DivisionKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column EventTypeName
+		dataType: string
+		lineageTag: 4a8bf017-66b5-442d-9fef-cfd61c224cf1
+		sourceLineageTag: EventTypeName
+		summarizeBy: none
+		sourceColumn: EventTypeName
+
+		annotation SummarizationSetBy = Automatic
+
+	column TrainingSpend
+		dataType: double
+		lineageTag: c5af2792-4283-4f9b-9ce8-9000872be121
+		sourceLineageTag: TrainingSpend
+		summarizeBy: sum
+		sourceColumn: TrainingSpend
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Fact_HREvents = entity
+		mode: directLake
+		source
+			entityName: Fact_HREvents
+			schemaName: dbo
+			expressionSource: 'DirectLake - InvestmentHouse_db'
+

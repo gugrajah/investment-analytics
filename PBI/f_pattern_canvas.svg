@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F4F6F9"/>
+      <stop offset="100%" stop-color="#E9ECEF"/>
+    </linearGradient>
+
+    <!-- Header Gradient (PIC Navy) -->
+    <linearGradient id="header-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#002B5C"/>
+      <stop offset="100%" stop-color="#001833"/>
+    </linearGradient>
+
+    <!-- Soft Drop Shadow Filter for Cards -->
+    <filter id="card-shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0F172A" flood-opacity="0.06" />
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#0F172A" flood-opacity="0.04" />
+    </filter>
+  </defs>
+
+  <!-- Base Canvas Background -->
+  <rect width="1280" height="720" fill="url(#bg-grad)"/>
+
+  <!-- Header Band (Y: 0, H: 80, W: 1280) -->
+  <rect x="0" y="0" width="1280" height="80" fill="url(#header-grad)"/>
+  
+  <!-- Header Accent Line (PIC Gold) -->
+  <rect x="0" y="80" width="1280" height="4" fill="#C9A84C"/>
+
+  <!-- ==================== KPI ROW CARDS (Y: 95, H: 100) ==================== -->
+  
+  <!-- Card 1 (X: 20, W: 285) -->
+  <rect x="20" y="95" width="285" height="100" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" filter="url(#card-shadow)"/>
+  <rect x="20" y="107" width="4" height="76" rx="2" fill="#002B5C"/> <!-- Navy Left Accent -->
+  
+  <!-- Card 2 (X: 338, W: 285) -->
+  <rect x="338" y="95" width="285" height="100" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" filter="url(#card-shadow)"/>
+  <rect x="338" y="107" width="4" height="76" rx="2" fill="#002B5C"/> <!-- Navy Left Accent -->
+
+  <!-- Card 3 (X: 657, W: 285) -->
+  <rect x="657" y="95" width="285" height="100" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" filter="url(#card-shadow)"/>
+  <rect x="657" y="107" width="4" height="76" rx="2" fill="#C9A84C"/> <!-- Gold Left Accent -->
+
+  <!-- Card 4 (X: 975, W: 285) -->
+  <rect x="975" y="95" width="285" height="100" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" filter="url(#card-shadow)"/>
+  <rect x="975" y="107" width="4" height="76" rx="2" fill="#C9A84C"/> <!-- Gold Left Accent -->
+
+  <!-- ==================== MIDDLE VISUALS PANELS (Y: 210, H: 240) ==================== -->
+  
+  <!-- Left Panel (X: 20, W: 600) -->
+  <rect x="20" y="210" width="600" height="240" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" filter="url(#card-shadow)"/>
+  <rect x="32" y="210" width="120" height="3" fill="#002B5C"/> <!-- Navy Top Accent Tab -->
+
+  <!-- Right Panel (X: 660, W: 600) -->
+  <rect x="660" y="210" width="600" height="240" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" filter="url(#card-shadow)"/>
+  <rect x="672" y="210" width="120" height="3" fill="#002B5C"/> <!-- Navy Top Accent Tab -->
+
+  <!-- ==================== BOTTOM VISUAL PANEL (Y: 465, H: 220) ==================== -->
+  
+  <!-- Full Width Panel (X: 20, W: 1240) -->
+  <rect x="20" y="465" width="1240" height="220" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" filter="url(#card-shadow)"/>
+  <rect x="32" y="465" width="200" height="3" fill="#C9A84C"/> <!-- Gold Top Accent Tab -->
+</svg>

@@ -1,0 +1,107 @@
+﻿table Fact_TradeSettlements
+	lineageTag: 32b3a4dc-1dab-4017-8cea-e4eeb6558857
+	sourceLineageTag: [dbo].[Fact_TradeSettlements]
+
+	column TradeKey
+		dataType: int64
+		formatString: 0
+		lineageTag: d1d92b48-dbf8-49c6-b035-1910d5ae7780
+		sourceLineageTag: TradeKey
+		summarizeBy: count
+		sourceColumn: TradeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExecutionDateKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 5c7120a0-1af6-442d-ae6a-2c200f3d2381
+		sourceLineageTag: ExecutionDateKey
+		summarizeBy: none
+		sourceColumn: ExecutionDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column SettlementDateKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 8f9e3fb1-a22a-45dc-a63b-8c8310539653
+		sourceLineageTag: SettlementDateKey
+		summarizeBy: count
+		sourceColumn: SettlementDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 62813d9f-4c84-4647-9a22-ec7121a9d94e
+		sourceLineageTag: AssetKey
+		summarizeBy: none
+		sourceColumn: AssetKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column FundKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 69977170-199f-4f14-8364-ec5cc8225adf
+		sourceLineageTag: FundKey
+		summarizeBy: none
+		sourceColumn: FundKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column BEELevelKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 57cfcbfa-acb2-468f-9c47-3994720e0c51
+		sourceLineageTag: BEELevelKey
+		summarizeBy: none
+		sourceColumn: BEELevelKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TradeValue
+		dataType: double
+		lineageTag: 0f60d732-d2cb-4d8b-8e36-8abdb55a2639
+		sourceLineageTag: TradeValue
+		summarizeBy: sum
+		sourceColumn: TradeValue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BrokerageFee
+		dataType: double
+		lineageTag: 628a6ff1-4c31-4e3f-8181-f9d7629bcf09
+		sourceLineageTag: BrokerageFee
+		summarizeBy: sum
+		sourceColumn: BrokerageFee
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SettlementStatus
+		dataType: string
+		lineageTag: 2960687c-006e-4a94-9c8b-d1f26d592198
+		sourceLineageTag: SettlementStatus
+		summarizeBy: none
+		sourceColumn: SettlementStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fact_TradeSettlements = entity
+		mode: directLake
+		source
+			entityName: Fact_TradeSettlements
+			schemaName: dbo
+			expressionSource: 'DirectLake - InvestmentHouse_db'
+

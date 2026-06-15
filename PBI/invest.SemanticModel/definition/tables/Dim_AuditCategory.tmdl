@@ -1,0 +1,429 @@
+table Dim_AuditCategory
+	lineageTag: 8a79527b-764d-42f4-acce-102b1f8f9168
+	sourceLineageTag: [dbo].[Dim_AuditCategory]
+
+	measure Opex_YoY_Variance_Percent = ```
+			
+			VAR CurrentYTD = TOTALYTD(SUM(Fact_FinancialTransactions[ActualAmount]), Dim_Date[Date])
+			VAR PriorYTD = TOTALYTD(SUM(Fact_FinancialTransactions[ActualAmount]), DATEADD(Dim_Date[Date], -1, YEAR))
+			VAR VarianceValue = CurrentYTD - PriorYTD
+			RETURN
+			    DIVIDE(
+			        VarianceValue, 
+			        PriorYTD, 
+			        0
+			    )
+			```
+		lineageTag: a19d8b3b-fa98-4036-840d-a53130272e20
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Active_Staff_Headcount =
+			
+			VAR MaxDateInContext = MAX(Dim_Date[Date])
+			RETURN
+				CALCULATE(
+					DISTINCTCOUNT(Fact_HREvents[EmployeeKey]),
+					Fact_HREvents[EventTypeName] = "Active Snapshot",
+					Dim_Date[Date] = MaxDateInContext
+				)
+		formatString: 0
+		lineageTag: 78878f96-d24a-4cbd-a674-8f234f43826c
+
+		changedProperty = Name
+
+	measure Annualized_Turnover_Percent =
+			
+			VAR ExitCount = CALCULATE(COUNTROWS(Fact_HREvents), Fact_HREvents[EventTypeName] = "Exit")
+			VAR AvgHeadcount = AVERAGEX(VALUES(Dim_Date[DateKey]), [Active_Staff_Headcount])
+			RETURN
+				DIVIDE(ExitCount, AvgHeadcount, 0)
+		lineageTag: 1ee56f81-49c4-4911-a353-ef7d60fa6d24
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Average_Days_to_Resolve =
+			
+			AVERAGEX(
+			    Fact_AuditFindings,
+			    IF(
+			        NOT(ISBLANK(Fact_AuditFindings[ActualResolutionDateKey])),
+			        DATEDIFF(
+			            RELATED(Dim_Date[Date]),
+			            LOOKUPVALUE(Dim_Date[Date], Dim_Date[DateKey], Fact_AuditFindings[ActualResolutionDateKey]),
+			            DAY
+			        )
+			    )
+			)
+		lineageTag: dcb0a9c7-5fdb-4b3b-8139-6ddcfaf54f5c
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure BBEE_Scorecard_Points =
+			
+			DIVIDE(SUMX(Fact_TradeSettlements, RELATED(Dim_BEELevel[RecognitionPercentage]) * Fact_TradeSettlements[TradeValue]), SUM(Fact_TradeSettlements[TradeValue]), 0)
+		formatString: "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
+		lineageTag: 3fdb9d54-508b-437d-9fb2-12b501558069
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	measure BEE_Brokerage_Allocation_Percent =
+			
+			DIVIDE(CALCULATE(SUM(Fact_TradeSettlements[BrokerageFee]), Dim_BEELevel[BEELevel] = 1), SUM(Fact_TradeSettlements[BrokerageFee]), 0)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: c66563f8-745b-4335-a24d-98eb6d7d4363
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	measure Budget_vs_Actual_Variance_Percent =
+			
+			DIVIDE(SUM(Fact_FinancialTransactions[ActualAmount]) - SUM(Fact_FinancialTransactions[BudgetAmount]), SUM(Fact_FinancialTransactions[BudgetAmount]), 0)
+		lineageTag: 63deddcb-6aa2-465a-bae8-d32e2252ff59
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Cost_to_Income_Ratio =
+			
+			VAR TotalIncome = SUMX(Fact_PortfolioReturns, Fact_PortfolioReturns[MarketValue] * 0.0015)
+			RETURN
+				DIVIDE(
+					SUM(Fact_FinancialTransactions[ActualAmount]),
+					TotalIncome,
+					0
+				)
+		lineageTag: 718efb70-f5fb-4dba-9ebc-7297ce6f19d2
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Division_Expenditure_Share_Percent = ```
+			
+			VAR SelectedDivisionSpend = SUM(Fact_FinancialTransactions[ActualAmount])
+			VAR TotalCorporateSpend = 
+				CALCULATE(
+					SUM(Fact_FinancialTransactions[ActualAmount]),
+					ALLSELECTED(Dim_Division)
+				)
+			RETURN
+				DIVIDE(
+					SelectedDivisionSpend, 
+					TotalCorporateSpend, 
+					0
+				)
+			```
+		lineageTag: e87318c4-5842-41bb-9baf-0ec8eb640f56
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure DPI =
+			
+			VAR TotalDistributions = CALCULATE(SUM(Fact_UnlistedInvestments[CashFlowAmount]), Fact_UnlistedInvestments[TransactionType] = "Distribution")
+			VAR TotalDrawdowns = -1 * CALCULATE(SUM(Fact_UnlistedInvestments[CashFlowAmount]), Fact_UnlistedInvestments[TransactionType] = "Drawdown")
+			RETURN DIVIDE(TotalDistributions, TotalDrawdowns, 0)
+		lineageTag: 304a6de5-f22d-4721-8094-65b2c9060973
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure EE_Alignment_Score =
+			
+			VAR HDIHeadcount = CALCULATE([Active_Staff_Headcount], Dim_Employee[IsHDI] = TRUE)
+			VAR TotalHeadcount = [Active_Staff_Headcount]
+			RETURN
+				DIVIDE(HDIHeadcount, TotalHeadcount, 0)
+		lineageTag: a2c2833a-1248-4a8a-9f1e-ffc2a545ccd7
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Fund AUM Share' =
+			
+			VAR CurrentFundAUM = [Total_AUM_ZAR]
+			VAR AllFundsAUM = CALCULATE([Total_AUM_ZAR], ALL(Dim_Fund))
+			RETURN
+			    DIVIDE(
+			        CurrentFundAUM,
+			        AllFundsAUM,
+			        0
+			    )
+		lineageTag: ecc66064-ee02-4da9-9537-d95b6e2aff8f
+
+		changedProperty = Name
+
+	measure Total_AUM_ZAR =
+			
+			SUM(Fact_PortfolioReturns[MarketValue])
+		formatString: "R"#,0;-"R"#,0;"R"#,0
+		lineageTag: e3877e71-6738-4e88-a58c-8e422c7b67e0
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-ZA"}
+
+	measure Helpdesk_SLA_Resolution_Percent =
+			
+			DIVIDE(CALCULATE(COUNTROWS(Fact_HelpdeskTickets), Fact_HelpdeskTickets[SLA_Met] = TRUE), COUNTROWS(Fact_HelpdeskTickets), 0)
+		lineageTag: a6e31619-9197-4519-9a2e-afdf8d27c6bb
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Information_Ratio =
+			
+			VAR ActiveReturn = AVERAGEX(Fact_PortfolioReturns, Fact_PortfolioReturns[DailyReturn] - Fact_PortfolioReturns[DailyBenchmarkReturn]) * 252
+			VAR TrackingError = [Portfolio_Tracking_Error_Percent]
+			RETURN DIVIDE(ActiveReturn, TrackingError, 0)
+		lineageTag: 20ce3439-df91-4a26-a23f-54a3d815ba11
+
+		changedProperty = Name
+
+	measure Portfolio_Tracking_Error_Percent =
+			
+			VAR MeanExcessReturn = AVERAGEX(Fact_PortfolioReturns, Fact_PortfolioReturns[DailyReturn] - Fact_PortfolioReturns[DailyBenchmarkReturn])
+			VAR ExcessReturnVarianceIter = SUMX(Fact_PortfolioReturns, POWER((Fact_PortfolioReturns[DailyReturn] - Fact_PortfolioReturns[DailyBenchmarkReturn]) - MeanExcessReturn, 2))
+			VAR TotalObservedDays = COUNTROWS(Fact_PortfolioReturns)
+			VAR DailyTrackingError = SQRT(DIVIDE(ExcessReturnVarianceIter, TotalObservedDays - 1, 0))
+			RETURN DailyTrackingError * SQRT(252)
+		lineageTag: 3887d266-1913-4baa-8d91-403f9e1553e0
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Mandate_Breach_Count =
+			
+			CALCULATE(COUNTROWS(Fact_PortfolioReturns), ABS(Fact_PortfolioReturns[DailyReturn] - Fact_PortfolioReturns[DailyBenchmarkReturn]) > 0.02)
+		formatString: 0
+		lineageTag: 3e9ef61e-f770-4254-aeaf-830bd58acd8d
+
+		changedProperty = Name
+
+	measure MOIC =
+			
+			VAR TotalDistributions = CALCULATE(SUM(Fact_UnlistedInvestments[CashFlowAmount]), Fact_UnlistedInvestments[TransactionType] = "Distribution")
+			VAR TotalDrawdowns = -1 * CALCULATE(SUM(Fact_UnlistedInvestments[CashFlowAmount]), Fact_UnlistedInvestments[TransactionType] = "Drawdown")
+			VAR CurrentNAV = CALCULATE(SUM(Fact_UnlistedInvestments[NetAssetValue]), Fact_UnlistedInvestments[TransactionType] = "Valuation")
+			RETURN DIVIDE(TotalDistributions + CurrentNAV, TotalDrawdowns, 0)
+		lineageTag: 2f85ae5b-101a-4c21-aabf-9a2615c8a01a
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Open_Audit_Findings_Count =
+			
+			CALCULATE(COUNTROWS(Fact_AuditFindings), Fact_AuditFindings[IsClosed] = FALSE)
+		formatString: 0
+		lineageTag: 9fcbf73b-54f2-4947-afe8-c19e5dd0213d
+
+		changedProperty = Name
+
+	measure PFMA_Irregular_Expenditure_Counter =
+			
+			CALCULATE(COUNTROWS(Fact_FinancialTransactions), Fact_FinancialTransactions[PFMA_Status_Code] > 0)
+		formatString: 0
+		lineageTag: eafdbe1a-308a-48bc-89a0-fa2e60552440
+
+		changedProperty = Name
+
+	measure Portfolio_Average_ESG_Score =
+			
+			DIVIDE(SUMX(Fact_PortfolioReturns, RELATED(Dim_InvestmentAsset[ESG_Score]) * Fact_PortfolioReturns[MarketValue]), [Total_AUM_ZAR], 0)
+		formatString: "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
+		lineageTag: 60819000-1740-4c41-bbdd-fb98480a0872
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	measure Portfolio_vs_Benchmark_Variance_Bps = ```
+			
+			VAR VariancePercent = [Weighted_Portfolio_Return_Percent] - [Weighted_Benchmark_Return_Percent]
+			RETURN
+			VariancePercent * 10000
+			
+			```
+		lineageTag: 4eb93106-d4b4-4c85-8487-db9d8406ffa0
+
+		changedProperty = Name
+
+	measure Weighted_Portfolio_Return_Percent =
+			
+			DIVIDE(SUMX(Fact_PortfolioReturns, Fact_PortfolioReturns[DailyReturn] * Fact_PortfolioReturns[MarketValue]), [Total_AUM_ZAR], 0)
+		lineageTag: aaeeed3b-b00d-48a3-93db-88b04139554c
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Weighted_Benchmark_Return_Percent = ```
+			
+			DIVIDE(
+			    SUMX(Fact_PortfolioReturns, Fact_PortfolioReturns[DailyBenchmarkReturn] * Fact_PortfolioReturns[MarketValue]),
+			    [Total_AUM_ZAR],
+			    0
+			)
+			
+			```
+		lineageTag: 001d9bb4-f362-4a2a-be3f-cba21d440b6c
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure VaR_95_1Day =
+			
+			VAR MeanReturn = AVERAGEX(Fact_PortfolioReturns, Fact_PortfolioReturns[DailyReturn])
+			VAR StdDevReturn = STDEVX.S(Fact_PortfolioReturns, Fact_PortfolioReturns[DailyReturn])
+			RETURN -1 * (MeanReturn - 1.645 * StdDevReturn)
+		lineageTag: 2fd1245e-e532-4861-921f-7f88c35d05de
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Sharpe_Ratio =
+			
+			VAR RiskFreeRate = DIVIDE(0.05, 252, 0)
+			VAR AvgExcessReturn = AVERAGEX(Fact_PortfolioReturns, Fact_PortfolioReturns[DailyReturn] - RiskFreeRate)
+			VAR StdDevReturn = STDEVX.S(Fact_PortfolioReturns, Fact_PortfolioReturns[DailyReturn])
+			RETURN DIVIDE(AvgExcessReturn, StdDevReturn, 0) * SQRT(252)
+		lineageTag: a3873d1c-6399-420f-8a74-e3fe2f02d732
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Skills_Development_Spend_Percent =
+			
+			DIVIDE(SUM(Fact_HREvents[TrainingSpend]), SUM(Dim_Employee[SalaryAmount]), 0)
+		lineageTag: fbca520f-2465-4e93-ab31-6594a915e03c
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Rolling_12Month_Opex = ```
+			
+			VAR EndDate = MAX(Dim_Date[Date])
+			VAR StartDate = EDATE(EndDate, -12) + 1
+			VAR CalculationPeriod = 
+				FILTER(
+					ALL(Dim_Date[Date]),
+					Dim_Date[Date] >= StartDate && 
+					Dim_Date[Date] <= EndDate
+				)
+			RETURN
+				CALCULATE(
+					SUM(Fact_FinancialTransactions[ActualAmount]),
+					CalculationPeriod
+				)
+			```
+		lineageTag: 2c2d36cb-1032-4d4f-8529-7c1493cc3a5b
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Private_Equity_IRR_Approximation =
+			
+			VAR CashFlowTable = SELECTCOLUMNS(Fact_UnlistedInvestments, "CF_Date", RELATED(Dim_Date[Date]), "CF_Amount", Fact_UnlistedInvestments[CashFlowAmount])
+			RETURN XIRR(CashFlowTable, [CF_Amount], [CF_Date])
+		lineageTag: d0684a9f-3b18-4421-9875-a50ba82fcb2b
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure System_Availability_Percent =
+			
+			VAR TotalDowntimeMinutes = CALCULATE(SUM(Fact_HelpdeskTickets[ResolutionDurationMinutes]), Fact_HelpdeskTickets[PriorityCode] = 1)
+			VAR TotalMinutesInPeriod = COUNTROWS(Dim_Date) * 1440
+			RETURN 1 - DIVIDE(TotalDowntimeMinutes, TotalMinutesInPeriod, 0)
+		lineageTag: ddd18e88-9f9c-4638-99dd-1d69ac0082ba
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Selected_Executive_Metric_Value =
+			
+			VAR CurrentSelection = SELECTEDVALUE(Dim_DynamicMetricControls[MetricName], "Total AUM")
+			RETURN
+				SWITCH(
+					CurrentSelection,
+					"Total AUM", [Total_AUM_ZAR],
+					"YTD Return", [Weighted_Portfolio_Return_Percent],
+					"PFMA Variances", [PFMA_Irregular_Expenditure_Counter],
+					[Total_AUM_ZAR]
+				)
+		lineageTag: c06c8ebd-7088-4ceb-b7c6-edd9d94a0b55
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AuditCategoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 7230a1f7-a6e5-4f46-810e-a00b7748e6ef
+		sourceLineageTag: AuditCategoryKey
+		summarizeBy: none
+		sourceColumn: AuditCategoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column SourceType
+		dataType: string
+		lineageTag: c214d6d7-f9fe-40ce-b941-a96d17ef1151
+		sourceLineageTag: SourceType
+		summarizeBy: none
+		sourceColumn: SourceType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Classification
+		dataType: string
+		lineageTag: f66b82a4-13a9-4f0e-8eed-cba02dc024dc
+		sourceLineageTag: Classification
+		summarizeBy: none
+		sourceColumn: Classification
+
+		annotation SummarizationSetBy = Automatic
+
+	column RiskLevel
+		dataType: string
+		lineageTag: 028cb178-adc4-4174-815a-c523356c4c25
+		sourceLineageTag: RiskLevel
+		summarizeBy: none
+		sourceColumn: RiskLevel
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_AuditCategory = entity
+		mode: directLake
+		source
+			entityName: Dim_AuditCategory
+			schemaName: dbo
+			expressionSource: 'DirectLake - InvestmentHouse_db'
+

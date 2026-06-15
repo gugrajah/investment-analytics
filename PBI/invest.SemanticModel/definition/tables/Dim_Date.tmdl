@@ -1,0 +1,88 @@
+table Dim_Date
+	lineageTag: 6f4116d6-db89-4569-9e00-ecb143235db0
+	sourceLineageTag: [dbo].[Dim_Date]
+
+	column DateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: da25d7c4-af26-4f5a-aaeb-56b9fdc9230c
+		sourceLineageTag: DateKey
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 29083b6d-2d4d-4503-a4d0-f80424fa6bed
+		sourceLineageTag: Date
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 296de835-099d-42e4-8fee-5f8c565d2433
+		sourceLineageTag: Year
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: string
+		lineageTag: 1970cbc7-ae17-4a81-b709-b66871eb5419
+		sourceLineageTag: Quarter
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName
+		dataType: string
+		lineageTag: e4bb9279-c189-4058-baa4-deffb28391a0
+		sourceLineageTag: MonthName
+		summarizeBy: none
+		sourceColumn: MonthName
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthFiscal
+		dataType: int64
+		formatString: 0
+		lineageTag: 2c678c78-999f-4073-bcf9-6e244fc7c118
+		sourceLineageTag: MonthFiscal
+		summarizeBy: sum
+		sourceColumn: MonthFiscal
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfWeek
+		dataType: string
+		lineageTag: 85c2afdc-89cf-4fcf-b3a3-593fba61fac9
+		sourceLineageTag: DayOfWeek
+		summarizeBy: none
+		sourceColumn: DayOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsPublicHolidayZA
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 56e26e0e-b3da-4af7-b013-91578a7b211d
+		sourceLineageTag: IsPublicHolidayZA
+		summarizeBy: none
+		sourceColumn: IsPublicHolidayZA
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Date = entity
+		mode: directLake
+		source
+			entityName: Dim_Date
+			schemaName: dbo
+			expressionSource: 'DirectLake - InvestmentHouse_db'
+

@@ -1,6 +1,5 @@
 Sharpe_Ratio := 
-VAR RiskFreeRate = 0.05 / 252
-VAR DailyExcessReturn = Fact_PortfolioReturns[DailyReturn] - RiskFreeRate
-VAR AvgExcessReturn = AVERAGEX(Fact_PortfolioReturns, DailyExcessReturn)
+VAR RiskFreeRate = DIVIDE(0.05, 252, 0)
+VAR AvgExcessReturn = AVERAGEX(Fact_PortfolioReturns, Fact_PortfolioReturns[DailyReturn] - RiskFreeRate)
 VAR StdDevReturn = STDEVX.S(Fact_PortfolioReturns, Fact_PortfolioReturns[DailyReturn])
 RETURN DIVIDE(AvgExcessReturn, StdDevReturn, 0) * SQRT(252)

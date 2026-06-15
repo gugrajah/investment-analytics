@@ -1,0 +1,57 @@
+table Dim_Fund
+	lineageTag: 85669b42-6818-43c7-aacc-df99aaaf5c46
+	sourceLineageTag: [dbo].[Dim_Fund]
+
+	column FundKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 8015fe9f-d5e6-4930-a71f-86f6c588b529
+		sourceLineageTag: FundKey
+		summarizeBy: none
+		sourceColumn: FundKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column FundName
+		dataType: string
+		lineageTag: c66968b0-3cb0-4944-9076-38410b8b6fdc
+		sourceLineageTag: FundName
+		summarizeBy: none
+		sourceColumn: FundName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClientType
+		dataType: string
+		lineageTag: 1b9fed14-883e-414b-a35d-01682683f366
+		sourceLineageTag: ClientType
+		summarizeBy: none
+		sourceColumn: ClientType
+
+		annotation SummarizationSetBy = Automatic
+
+	column InvestmentMandate
+		dataType: string
+		lineageTag: f6a2c9f6-4ea7-4b38-918d-495c7f98bb39
+		sourceLineageTag: InvestmentMandate
+		summarizeBy: none
+		sourceColumn: InvestmentMandate
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssignedManagerEmail
+		dataType: string
+		lineageTag: 1c5119a2-7142-4c60-b7ce-c8ba3c421c46
+		sourceLineageTag: AssignedManagerEmail
+		summarizeBy: none
+		sourceColumn: AssignedManagerEmail
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Fund = entity
+		mode: directLake
+		source
+			entityName: Dim_Fund
+			schemaName: dbo
+			expressionSource: 'DirectLake - InvestmentHouse_db'
+

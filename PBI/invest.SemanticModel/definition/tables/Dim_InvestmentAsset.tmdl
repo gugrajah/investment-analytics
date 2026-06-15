@@ -1,0 +1,81 @@
+table Dim_InvestmentAsset
+	lineageTag: c1e4db55-01c5-4064-898f-d9f2140b3d96
+	sourceLineageTag: [dbo].[Dim_InvestmentAsset]
+
+	column AssetKey
+		dataType: int64
+		formatString: 0
+		lineageTag: d18aac36-4cc0-4ba2-a60e-9ee54a45040a
+		sourceLineageTag: AssetKey
+		summarizeBy: none
+		sourceColumn: AssetKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISIN
+		dataType: string
+		lineageTag: d279cc08-cdca-4c49-a260-6381c1720773
+		sourceLineageTag: ISIN
+		summarizeBy: none
+		sourceColumn: ISIN
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetName
+		dataType: string
+		lineageTag: 0f244415-5a19-41a8-a76a-96c5dc1388eb
+		sourceLineageTag: AssetName
+		summarizeBy: none
+		sourceColumn: AssetName
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetClass
+		dataType: string
+		lineageTag: 438a18d2-32a0-4b43-86e3-9081cdb9e15f
+		sourceLineageTag: AssetClass
+		summarizeBy: none
+		sourceColumn: AssetClass
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sector
+		dataType: string
+		lineageTag: bc49a4c5-b263-41eb-9842-2e246374644c
+		sourceLineageTag: Sector
+		summarizeBy: none
+		sourceColumn: Sector
+
+		annotation SummarizationSetBy = Automatic
+
+	column ESG_Score
+		dataType: decimal
+		formatString: "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
+		lineageTag: f31e8c1f-90eb-49af-a570-0192efa7c07f
+		sourceLineageTag: ESG_Score
+		summarizeBy: sum
+		sourceColumn: ESG_Score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column CarbonIntensity
+		dataType: decimal
+		formatString: "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
+		lineageTag: b92f499b-9b88-406c-a06d-7e2f9de748de
+		sourceLineageTag: CarbonIntensity
+		summarizeBy: sum
+		sourceColumn: CarbonIntensity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	partition Dim_InvestmentAsset = entity
+		mode: directLake
+		source
+			entityName: Dim_InvestmentAsset
+			schemaName: dbo
+			expressionSource: 'DirectLake - InvestmentHouse_db'
+

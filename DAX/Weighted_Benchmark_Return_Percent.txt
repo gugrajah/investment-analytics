@@ -1,0 +1,6 @@
+Weighted_Benchmark_Return_Percent := 
+DIVIDE(
+    SUMX(Fact_PortfolioReturns, Fact_PortfolioReturns[DailyBenchmarkReturn] * Fact_PortfolioReturns[MarketValue]),
+    [Total_AUM_ZAR],
+    0
+)

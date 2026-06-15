@@ -1,0 +1,110 @@
+relationship 3c3beba7-c310-ac48-b607-11bff9a4d145
+	fromColumn: Fact_FinancialTransactions.DateKey
+	toColumn: Dim_Date.DateKey
+
+relationship 02684449-4200-9656-0a8d-3d96ba7f3004
+	fromColumn: Fact_FinancialTransactions.DivisionKey
+	toColumn: Dim_Division.DivisionKey
+
+relationship 20c5d52e-7357-48ce-4fe8-115ba8611aab
+	fromColumn: Fact_HREvents.DateKey
+	toColumn: Dim_Date.DateKey
+
+relationship 051cb1a1-b877-3c9f-dcee-b78a4f4dbd89
+	fromColumn: Fact_HREvents.EmployeeKey
+	toColumn: Dim_Employee.EmployeeKey
+
+relationship 051bdd49-ec2f-9ae7-f992-bbd0374f2eba
+	fromColumn: Fact_HREvents.DivisionKey
+	toColumn: Dim_Division.DivisionKey
+
+relationship 695250e4-b7c3-b696-dbeb-0ef660aca3c7
+	fromColumn: Fact_TradeSettlements.ExecutionDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship 41bea39f-144b-d6c5-335a-02dabd4ca663
+	isActive: false
+	fromColumn: Fact_TradeSettlements.SettlementDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship ff8959f5-1892-648e-49e5-1e6f200684b7
+	fromColumn: Fact_TradeSettlements.AssetKey
+	toColumn: Dim_InvestmentAsset.AssetKey
+
+relationship 9eae4d87-8a05-4b1d-41d6-353bb75fba85
+	fromColumn: Fact_TradeSettlements.FundKey
+	toColumn: Dim_Fund.FundKey
+
+relationship bd731fbb-244f-da76-3148-ac9b9a6a0d34
+	fromColumn: Fact_TradeSettlements.BEELevelKey
+	toColumn: Dim_BEELevel.BEELevelKey
+
+relationship 58cc8ff0-6c1c-e963-4fd1-fd39e1c98243
+	fromColumn: Fact_AuditFindings.RaisedDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship 02059e2b-f1fb-9f43-5bea-d2e39d0c6750
+	isActive: false
+	fromColumn: Fact_AuditFindings.TargetDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship 1967adab-65fa-bdc0-9798-1d35ebbd01bd
+	isActive: false
+	fromColumn: Fact_AuditFindings.ActualResolutionDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship 52be34e4-0a4f-0718-0e90-f43706f24ad0
+	fromColumn: Fact_AuditFindings.AuditCategoryKey
+	toColumn: Dim_AuditCategory.AuditCategoryKey
+
+relationship d073b07b-0601-9ac9-c067-a9b70e4522bc
+	crossFilteringBehavior: bothDirections
+	fromColumn: Fact_AuditFindings.DivisionKey
+	toColumn: Dim_Division.DivisionKey
+
+relationship a4964f37-552b-7963-7709-73b6f6afe896
+	fromColumn: Fact_ProjectMilestones.PlannedDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship e8555293-610e-4673-8609-fa71216f8243
+	isActive: false
+	fromColumn: Fact_ProjectMilestones.ActualDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship bee15c81-6b50-49ff-5965-0f22199ab033
+	fromColumn: Fact_PortfolioReturns.DateKey
+	toColumn: Dim_Date.DateKey
+
+relationship 91eae731-d197-7d5a-dd40-b1753fa5e186
+	fromColumn: Fact_PortfolioReturns.AssetKey
+	toColumn: Dim_InvestmentAsset.AssetKey
+
+relationship 67424fa7-7015-6340-5e4b-3b10407b2b8f
+	fromColumn: Fact_PortfolioReturns.FundKey
+	toColumn: Dim_Fund.FundKey
+
+relationship 882e24cc-7271-4290-142d-09d1d5fc6c8c
+	fromColumn: Fact_UnlistedInvestments.DateKey
+	toColumn: Dim_Date.DateKey
+
+relationship f684484f-7881-6150-58f8-84521463f7e0
+	fromColumn: Fact_UnlistedInvestments.AssetKey
+	toColumn: Dim_InvestmentAsset.AssetKey
+
+relationship 9968e79b-a6cd-2408-1dc4-3513294869cc
+	fromColumn: Fact_UnlistedInvestments.FundKey
+	toColumn: Dim_Fund.FundKey
+
+relationship cd8edb23-e650-d45f-c930-a44f9af049d5
+	fromColumn: Fact_HelpdeskTickets.CreatedDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship fa8c1408-c60f-5d27-1f97-fe19272c424f
+	isActive: false
+	fromColumn: Fact_HelpdeskTickets.ClosedDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship f4ac8e9e-1836-8477-82b5-1cad9beaf20e
+	fromColumn: Fact_HelpdeskTickets.EmployeeKey
+	toColumn: Dim_Employee.EmployeeKey
+

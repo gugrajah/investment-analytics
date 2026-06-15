@@ -1,0 +1,39 @@
+table Dim_RegulatoryBody
+	lineageTag: 973a37b9-46c7-4967-a0b6-6fa4003a8bbc
+	sourceLineageTag: [dbo].[Dim_RegulatoryBody]
+
+	column RegulatoryBodyKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 65711c67-9dcc-41f8-820f-a82602a1e797
+		sourceLineageTag: RegulatoryBodyKey
+		summarizeBy: count
+		sourceColumn: RegulatoryBodyKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column BodyName
+		dataType: string
+		lineageTag: a6e82a22-d620-493e-a3e4-235e866ebd80
+		sourceLineageTag: BodyName
+		summarizeBy: none
+		sourceColumn: BodyName
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubmissionCycle
+		dataType: string
+		lineageTag: 93ff1491-61f2-495a-976c-448f639ebfe0
+		sourceLineageTag: SubmissionCycle
+		summarizeBy: none
+		sourceColumn: SubmissionCycle
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_RegulatoryBody = entity
+		mode: directLake
+		source
+			entityName: Dim_RegulatoryBody
+			schemaName: dbo
+			expressionSource: 'DirectLake - InvestmentHouse_db'
+

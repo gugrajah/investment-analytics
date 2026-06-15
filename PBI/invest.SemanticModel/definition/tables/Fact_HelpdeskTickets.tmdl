@@ -1,0 +1,84 @@
+﻿table Fact_HelpdeskTickets
+	lineageTag: 6154c194-14c1-4402-8498-5da9f57c6826
+	sourceLineageTag: [dbo].[Fact_HelpdeskTickets]
+
+	column TicketKey
+		dataType: int64
+		formatString: 0
+		lineageTag: ffba6cf8-72f8-437d-aa4f-31b1f9b14660
+		sourceLineageTag: TicketKey
+		summarizeBy: count
+		sourceColumn: TicketKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreatedDateKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: a081d5c1-cccb-4a09-8bf0-3daf3b0b9536
+		sourceLineageTag: CreatedDateKey
+		summarizeBy: none
+		sourceColumn: CreatedDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClosedDateKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: ce9a6bb3-7e3f-44ad-97b5-a8baaa3252bf
+		sourceLineageTag: ClosedDateKey
+		summarizeBy: count
+		sourceColumn: ClosedDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 631b6dbc-a2ec-483c-8817-e3457bf05632
+		sourceLineageTag: EmployeeKey
+		summarizeBy: none
+		sourceColumn: EmployeeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column PriorityCode
+		dataType: int64
+		formatString: 0
+		lineageTag: 2ccfe953-2ba2-4dd2-8005-eada21f7c09a
+		sourceLineageTag: PriorityCode
+		summarizeBy: count
+		sourceColumn: PriorityCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ResolutionDurationMinutes
+		dataType: int64
+		formatString: 0
+		lineageTag: bac1c2db-8c94-4890-a073-3952bdaffedd
+		sourceLineageTag: ResolutionDurationMinutes
+		summarizeBy: sum
+		sourceColumn: ResolutionDurationMinutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column SLA_Met
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 328666fa-ec1e-4faa-ab80-f04276bdf8e9
+		sourceLineageTag: SLA_Met
+		summarizeBy: none
+		sourceColumn: SLA_Met
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fact_HelpdeskTickets = entity
+		mode: directLake
+		source
+			entityName: Fact_HelpdeskTickets
+			schemaName: dbo
+			expressionSource: 'DirectLake - InvestmentHouse_db'
+

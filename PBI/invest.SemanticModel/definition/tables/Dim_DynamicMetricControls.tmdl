@@ -1,0 +1,40 @@
+table Dim_DynamicMetricControls
+	lineageTag: b5e66778-6911-434c-ad1a-a5d2bdc04a64
+	sourceLineageTag: [dbo].[Dim_DynamicMetricControls]
+
+	column MetricKey
+		dataType: int64
+		formatString: 0
+		lineageTag: f255bf35-f8c5-415d-9956-93d95ad2484b
+		sourceLineageTag: MetricKey
+		summarizeBy: count
+		sourceColumn: MetricKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column MetricName
+		dataType: string
+		lineageTag: 5a4520d7-3f6a-48f5-9d5c-007ba9a750cd
+		sourceLineageTag: MetricName
+		summarizeBy: none
+		sourceColumn: MetricName
+
+		annotation SummarizationSetBy = Automatic
+
+	column MetricDisplayOrder
+		dataType: int64
+		formatString: 0
+		lineageTag: 5be5577e-676c-4593-88ca-3d6663f0b0c7
+		sourceLineageTag: MetricDisplayOrder
+		summarizeBy: sum
+		sourceColumn: MetricDisplayOrder
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_DynamicMetricControls = entity
+		mode: directLake
+		source
+			entityName: Dim_DynamicMetricControls
+			schemaName: dbo
+			expressionSource: 'DirectLake - InvestmentHouse_db'
+

@@ -1,0 +1,99 @@
+{
+  "name": "PIC Corporate Theme",
+  "dataColors": [
+    "#002B5C",
+    "#C9A84C",
+    "#2F3E46",
+    "#52796F",
+    "#84A98C",
+    "#354F52",
+    "#CAD2C5",
+    "#1E293B",
+    "#D97706",
+    "#EF4444"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#002B5C",
+  "tableAccent": "#002B5C",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": { "solid": { "color": "#FFFFFF" } },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": { "solid": { "color": "#E2E8F0" } },
+            "width": 1
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": true,
+            "color": { "solid": { "color": "#0F172A" } },
+            "transparency": 95,
+            "position": "Outer",
+            "preset": "BottomRight"
+          }
+        ],
+        "title": [
+          {
+            "show": true,
+            "fontFamily": "Outfit",
+            "fontSize": 12,
+            "fontColor": { "solid": { "color": "#002B5C" } },
+            "bold": true
+          }
+        ],
+        "visualHeader": [
+          {
+            "show": true
+          }
+        ]
+      }
+    },
+    "card": {
+      "*": {
+        "labels": [
+          {
+            "color": { "solid": { "color": "#002B5C" } },
+            "fontSize": 24,
+            "fontFamily": "Outfit",
+            "bold": true
+          }
+        ],
+        "categoryLabels": [
+          {
+            "color": { "solid": { "color": "#64748B" } },
+            "fontSize": 9,
+            "fontFamily": "Inter"
+          }
+        ]
+      }
+    },
+    "textbox": {
+      "*": {
+        "background": [
+          {
+            "show": false
+          }
+        ],
+        "border": [
+          {
+            "show": false
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": false
+          }
+        ]
+      }
+    }
+  }
+}

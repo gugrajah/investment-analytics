@@ -1,0 +1,96 @@
+table Dim_Employee
+	lineageTag: 82dc9ebf-62dd-4bf1-a492-1ecb0cd2be70
+	sourceLineageTag: [dbo].[Dim_Employee]
+
+	column EmployeeKey
+		dataType: int64
+		formatString: 0
+		lineageTag: f5747ae9-1159-49c2-817d-64fc15e4d6fe
+		sourceLineageTag: EmployeeKey
+		summarizeBy: none
+		sourceColumn: EmployeeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeID
+		dataType: string
+		lineageTag: 777d28b2-2570-4ab8-851c-c569f4e5aacb
+		sourceLineageTag: EmployeeID
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FullName
+		dataType: string
+		lineageTag: f2038dcb-b8c3-4295-863b-718783a1aa5d
+		sourceLineageTag: FullName
+		summarizeBy: none
+		sourceColumn: FullName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email
+		dataType: string
+		lineageTag: 946a0004-5cbf-47ed-9625-86f57e958914
+		sourceLineageTag: Email
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: b2bc6fc1-b5f4-4a56-89a7-97521d6f0f79
+		sourceLineageTag: Gender
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column EthnicGroup
+		dataType: string
+		lineageTag: 1c047e06-be03-41eb-b17e-9ce95305f5dd
+		sourceLineageTag: EthnicGroup
+		summarizeBy: none
+		sourceColumn: EthnicGroup
+
+		annotation SummarizationSetBy = Automatic
+
+	column OccupationalLevel
+		dataType: string
+		lineageTag: 098f4e4c-d51b-4cdb-81c0-2bf5a8ea88f4
+		sourceLineageTag: OccupationalLevel
+		summarizeBy: none
+		sourceColumn: OccupationalLevel
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsHDI
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e5c99f7d-4323-4b04-8206-70d7ded6d32b
+		sourceLineageTag: IsHDI
+		summarizeBy: none
+		sourceColumn: IsHDI
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalaryAmount
+		dataType: double
+		lineageTag: de008aba-a65b-4ada-9118-781dffcfbec9
+		sourceLineageTag: SalaryAmount
+		summarizeBy: sum
+		sourceColumn: SalaryAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Dim_Employee = entity
+		mode: directLake
+		source
+			entityName: Dim_Employee
+			schemaName: dbo
+			expressionSource: 'DirectLake - InvestmentHouse_db'
+

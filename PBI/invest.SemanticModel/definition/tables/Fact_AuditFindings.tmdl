@@ -1,0 +1,96 @@
+﻿table Fact_AuditFindings
+	lineageTag: 81b0ac89-4098-4778-b699-51299c492ce9
+	sourceLineageTag: [dbo].[Fact_AuditFindings]
+
+	column FindingKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 501ed1b1-c1bc-49d0-b946-297fbb83bd15
+		sourceLineageTag: FindingKey
+		summarizeBy: count
+		sourceColumn: FindingKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column RaisedDateKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 0899040d-0152-43c0-a159-8748a47487bc
+		sourceLineageTag: RaisedDateKey
+		summarizeBy: none
+		sourceColumn: RaisedDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TargetDateKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 99daaf57-e3ed-4a4c-889f-1d86483bfb73
+		sourceLineageTag: TargetDateKey
+		summarizeBy: count
+		sourceColumn: TargetDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActualResolutionDateKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 9a7479f9-c657-446d-96e2-d25fe4d72610
+		sourceLineageTag: ActualResolutionDateKey
+		summarizeBy: count
+		sourceColumn: ActualResolutionDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AuditCategoryKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: ad6a369e-beb6-4be0-81e9-c9f7a343a8ac
+		sourceLineageTag: AuditCategoryKey
+		summarizeBy: none
+		sourceColumn: AuditCategoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivisionKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: eab443da-4e14-412b-bced-c5eb1ef2a068
+		sourceLineageTag: DivisionKey
+		summarizeBy: none
+		sourceColumn: DivisionKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column SeverityWeight
+		dataType: int64
+		formatString: 0
+		lineageTag: e62db0d6-3d94-4c96-a5ac-7c4c7e6c1fda
+		sourceLineageTag: SeverityWeight
+		summarizeBy: sum
+		sourceColumn: SeverityWeight
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsClosed
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b4bbbb58-25f5-451f-9764-14261b72778c
+		sourceLineageTag: IsClosed
+		summarizeBy: none
+		sourceColumn: IsClosed
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fact_AuditFindings = entity
+		mode: directLake
+		source
+			entityName: Fact_AuditFindings
+			schemaName: dbo
+			expressionSource: 'DirectLake - InvestmentHouse_db'
+

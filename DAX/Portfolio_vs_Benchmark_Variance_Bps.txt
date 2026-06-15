@@ -1,0 +1,4 @@
+Portfolio_vs_Benchmark_Variance_Bps := 
+VAR VariancePercent = [Weighted_Portfolio_Return_Percent] - [Weighted_Benchmark_Return_Percent]
+RETURN
+VariancePercent * 10000

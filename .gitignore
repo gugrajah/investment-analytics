@@ -1,9 +1,36 @@
+# ==========================================================
+# PIC Sovereign Portfolio Analytics - Git Ignore Configuration
+# ==========================================================
+
+# --- OS / System Files ---
+.DS_Store
+.DS_Store 2
+Thumbs.db
+
+# --- Google Drive Link Files ---
+# These are local pointer files that only work on the owner's Google Drive.
 *.gdoc
-dataset_gen.py
-*.pdf
-PORTFOLIO ARCHITECTURE.md
-Project Brief Extended.md
-Internal Corporate & Operational Efficiency.md
-task.md 
+
+# --- Power BI Project (PBIP) Local/User Settings ---
+# Microsoft recommends ignoring local user settings and model caches to prevent merge conflicts.
+**/localSettings.json
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+**/.pbi/editorSettings.json
+**/cache.abf
+
+# --- AI Agent / Development Tool Workspace Files ---
+# Ignore internal AI agent workspace and task lists
+brain/
+task.md
 implementation_plan.md
-screenshot/
+walkthrough.md
+
+# --- Temporary / Scratch Developer Files ---
+# Initial draft research and generation scripts
+dataset_gen.py
+Internal Corporate & Operational Efficiency.md
+
+# --- Documentation Binaries (Optional) ---
+# Uncomment below if you do not want to commit the PDF version of the architecture.
+# *.pdf

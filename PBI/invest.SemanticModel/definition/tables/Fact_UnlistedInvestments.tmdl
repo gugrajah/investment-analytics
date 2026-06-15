@@ -1,0 +1,85 @@
+﻿table Fact_UnlistedInvestments
+	lineageTag: 60ebb157-0333-46c4-a8de-bd99a74568dc
+	sourceLineageTag: [dbo].[Fact_UnlistedInvestments]
+
+	column UnlistedTransactionKey
+		dataType: int64
+		formatString: 0
+		lineageTag: b27bdf10-aa08-4355-86cf-a64f74dca672
+		sourceLineageTag: UnlistedTransactionKey
+		summarizeBy: count
+		sourceColumn: UnlistedTransactionKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 6a2d97c2-8280-46b6-8ada-27782a7488ee
+		sourceLineageTag: DateKey
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: a45a3992-5ca2-4518-84ad-e22bfde73e22
+		sourceLineageTag: AssetKey
+		summarizeBy: none
+		sourceColumn: AssetKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column FundKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 24233173-8bde-433c-acfb-454bda946367
+		sourceLineageTag: FundKey
+		summarizeBy: none
+		sourceColumn: FundKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TransactionType
+		dataType: string
+		lineageTag: c88c4fed-5dfe-4443-93ec-7e2d99352d87
+		sourceLineageTag: TransactionType
+		summarizeBy: none
+		sourceColumn: TransactionType
+
+		annotation SummarizationSetBy = Automatic
+
+	column CashFlowAmount
+		dataType: double
+		lineageTag: 2be1f3d2-c70b-4ea1-baf4-c86dbe219d25
+		sourceLineageTag: CashFlowAmount
+		summarizeBy: sum
+		sourceColumn: CashFlowAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NetAssetValue
+		dataType: double
+		lineageTag: a09502cd-d8bc-4233-bcdc-b52af8c3ed44
+		sourceLineageTag: NetAssetValue
+		summarizeBy: sum
+		sourceColumn: NetAssetValue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Fact_UnlistedInvestments = entity
+		mode: directLake
+		source
+			entityName: Fact_UnlistedInvestments
+			schemaName: dbo
+			expressionSource: 'DirectLake - InvestmentHouse_db'
+

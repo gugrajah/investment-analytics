@@ -1,0 +1,57 @@
+table Dim_Division
+	lineageTag: 93071b5e-af8f-4a7a-bda1-9dffa1aba4f7
+	sourceLineageTag: [dbo].[Dim_Division]
+
+	column DivisionKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 26ecbabb-b1db-4cfc-a8f4-b35e40fd2078
+		sourceLineageTag: DivisionKey
+		summarizeBy: none
+		sourceColumn: DivisionKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivisionName
+		dataType: string
+		lineageTag: 001b5240-585d-4472-b3fc-ab198f01f01e
+		sourceLineageTag: DivisionName
+		summarizeBy: none
+		sourceColumn: DivisionName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExecutiveHead
+		dataType: string
+		lineageTag: dfd9dd8a-a64c-40b3-9e6d-085b432f60cd
+		sourceLineageTag: ExecutiveHead
+		summarizeBy: none
+		sourceColumn: ExecutiveHead
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExecutiveHeadEmail
+		dataType: string
+		lineageTag: 7e5970c8-5770-463d-9928-36e99875f236
+		sourceLineageTag: ExecutiveHeadEmail
+		summarizeBy: none
+		sourceColumn: ExecutiveHeadEmail
+
+		annotation SummarizationSetBy = Automatic
+
+	column CostCenterCode
+		dataType: string
+		lineageTag: be65ca0d-a10e-4f4f-855d-a936a7c8ab2b
+		sourceLineageTag: CostCenterCode
+		summarizeBy: none
+		sourceColumn: CostCenterCode
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Division = entity
+		mode: directLake
+		source
+			entityName: Dim_Division
+			schemaName: dbo
+			expressionSource: 'DirectLake - InvestmentHouse_db'
+

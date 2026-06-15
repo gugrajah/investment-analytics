@@ -1,0 +1,95 @@
+﻿table Fact_FinancialTransactions
+	lineageTag: ab436534-1dda-4335-8d6e-7b2b7d885976
+	sourceLineageTag: [dbo].[Fact_FinancialTransactions]
+
+	column TransactionKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 41379b3e-51ce-4eb8-81e3-8ef15f05c496
+		sourceLineageTag: TransactionKey
+		summarizeBy: count
+		sourceColumn: TransactionKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 659a270c-2808-4943-abb3-4adc462ed606
+		sourceLineageTag: DateKey
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivisionKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: d62a4dbe-6b15-4617-83ba-2741bb957d97
+		sourceLineageTag: DivisionKey
+		summarizeBy: none
+		sourceColumn: DivisionKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountCode
+		dataType: int64
+		formatString: 0
+		lineageTag: 85267235-7ea0-4f37-9d77-242a97990a8b
+		sourceLineageTag: AccountCode
+		summarizeBy: count
+		sourceColumn: AccountCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActualAmount
+		dataType: double
+		lineageTag: 5f731dbe-33f3-41e2-803b-45d6012f2266
+		sourceLineageTag: ActualAmount
+		summarizeBy: sum
+		sourceColumn: ActualAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BudgetAmount
+		dataType: double
+		lineageTag: da10ce54-b73d-438a-81ff-008395d0012b
+		sourceLineageTag: BudgetAmount
+		summarizeBy: sum
+		sourceColumn: BudgetAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PFMA_Status_Code
+		dataType: int64
+		formatString: 0
+		lineageTag: 86ff82b0-0080-406b-b6ca-b769c80ca75e
+		sourceLineageTag: PFMA_Status_Code
+		summarizeBy: count
+		sourceColumn: PFMA_Status_Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Last_Modified_Timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0bfb4b9e-9750-4c98-94d9-efa2cb69faf3
+		sourceLineageTag: Last_Modified_Timestamp
+		summarizeBy: none
+		sourceColumn: Last_Modified_Timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fact_FinancialTransactions = entity
+		mode: directLake
+		source
+			entityName: Fact_FinancialTransactions
+			schemaName: dbo
+			expressionSource: 'DirectLake - InvestmentHouse_db'
+

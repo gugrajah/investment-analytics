@@ -1,0 +1,43 @@
+table Dim_BEELevel
+	lineageTag: c786040f-4cd6-448c-8c0a-1e70478352a2
+	sourceLineageTag: [dbo].[Dim_BEELevel]
+
+	column BEELevelKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 9a5a7f27-41fa-40c9-8d6e-72b41aede5ae
+		sourceLineageTag: BEELevelKey
+		summarizeBy: none
+		sourceColumn: BEELevelKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column BEELevel
+		dataType: int64
+		formatString: 0
+		lineageTag: c2701012-815e-4596-aa94-f76f7b0fa7ce
+		sourceLineageTag: BEELevel
+		summarizeBy: none
+		sourceColumn: BEELevel
+
+		annotation SummarizationSetBy = Automatic
+
+	column RecognitionPercentage
+		dataType: decimal
+		formatString: "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
+		lineageTag: c7f8b9dd-9c27-4ce6-b26c-c439b665e003
+		sourceLineageTag: RecognitionPercentage
+		summarizeBy: none
+		sourceColumn: RecognitionPercentage
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	partition Dim_BEELevel = entity
+		mode: directLake
+		source
+			entityName: Dim_BEELevel
+			schemaName: dbo
+			expressionSource: 'DirectLake - InvestmentHouse_db'
+

@@ -1,0 +1,6 @@
+Fund_Allocation_Percent := 
+DIVIDE(
+    [Total_AUM_ZAR],
+    CALCULATE([Total_AUM_ZAR], ALL(Dim_Fund)),
+    0
+)

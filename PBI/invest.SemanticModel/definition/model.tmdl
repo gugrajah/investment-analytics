@@ -1,0 +1,34 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["DirectLake - InvestmentHouse_db"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation __LastRPTime = 134259799647587052
+
+annotation PBI_ProTooling = ["DirectLakeOnOneLakeInWeb","WebModelingEdit"]
+
+ref table Dim_DynamicMetricControls
+ref table Fact_PortfolioReturns
+ref table Fact_TradeSettlements
+ref table Dim_Fund
+ref table Dim_Division
+ref table Dim_InvestmentAsset
+ref table Fact_ProjectMilestones
+ref table Dim_Date
+ref table Fact_UnlistedInvestments
+ref table Fact_HelpdeskTickets
+ref table Fact_FinancialTransactions
+ref table Fact_AuditFindings
+ref table Dim_RegulatoryBody
+ref table Fact_HREvents
+ref table Dim_BEELevel
+ref table Dim_AuditCategory
+ref table Dim_Employee
+

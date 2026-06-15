@@ -1,0 +1,83 @@
+﻿table Fact_ProjectMilestones
+	lineageTag: 95cd327f-a674-4ee2-baa4-4ec433a9893f
+	sourceLineageTag: [dbo].[Fact_ProjectMilestones]
+
+	column MilestoneKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 6944b337-7088-4737-83f7-edf1b37f1f8b
+		sourceLineageTag: MilestoneKey
+		summarizeBy: count
+		sourceColumn: MilestoneKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column PlannedDateKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: eb4fd6bd-618f-4310-a77f-0a517f228eda
+		sourceLineageTag: PlannedDateKey
+		summarizeBy: none
+		sourceColumn: PlannedDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActualDateKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 12b139b2-0ab4-4ada-948b-bb8f434f0082
+		sourceLineageTag: ActualDateKey
+		summarizeBy: count
+		sourceColumn: ActualDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProjectKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 0b837c34-e7a1-4e88-b4c9-7c87afb721df
+		sourceLineageTag: ProjectKey
+		summarizeBy: count
+		sourceColumn: ProjectKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column MilestoneName
+		dataType: string
+		lineageTag: 356e8d87-f91c-4e7e-add8-5e2ea9fc9703
+		sourceLineageTag: MilestoneName
+		summarizeBy: none
+		sourceColumn: MilestoneName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weight
+		dataType: decimal
+		formatString: "Â£"#,0.###############;-"Â£"#,0.###############;"Â£"#,0.###############
+		lineageTag: 582cea97-beb9-4b32-89ef-6203a3706a60
+		sourceLineageTag: Weight
+		summarizeBy: sum
+		sourceColumn: Weight
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column Status
+		dataType: string
+		lineageTag: cfabc2bd-d558-455c-8ffb-fa894b0db937
+		sourceLineageTag: Status
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fact_ProjectMilestones = entity
+		mode: directLake
+		source
+			entityName: Fact_ProjectMilestones
+			schemaName: dbo
+			expressionSource: 'DirectLake - InvestmentHouse_db'
+
