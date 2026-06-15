@@ -1,4 +1,4 @@
-# PIC Sovereign Portfolio Analytics — Power BI Enterprise Showcase
+# Sovereign Portfolio Analytics — Power BI Enterprise Showcase
 
 A production-ready Power BI Enterprise Showcase designed for South Africa's sovereign asset manager overseeing ~R2.7 trillion AUM. 
 
