@@ -34,3 +34,9 @@ Internal Corporate & Operational Efficiency.md
 # --- Documentation Binaries (Optional) ---
 # Uncomment below if you do not want to commit the PDF version of the architecture.
 # *.pdf
+
+# --- Excluded Docs (Kept Locally) ---
+project_docs/PORTFOLIO ARCHITECTURE.md
+project_docs/Portfolio Architecture.pdf
+project_docs/Project Brief Extended.md
+
